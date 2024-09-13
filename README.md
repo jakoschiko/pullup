@@ -14,26 +14,30 @@ pullup runs on your server and can be configured via a single config file:
 
 ```toml
 [general]
+repositories = "~/pullup"
 config-refresh = "10s"
-service-refresh = "60s"
+repository-refresh = "60s"
+container-refresh = "02:00"
 
-[service.foo]
+[[service]]
+name = "foo"
 git = "https://github.com/example/foo.git"
 rev = "main"
 
-[[env]]
+[[service.env]]
 name = "user"
 value = "admin"
 
-[[env]]
+[[service.env]]
 name = "password"
 value = "secret"
 
-[service.bar]
+[[service]]
+name = "bar"
 git = "https://github.com/example/bar.git"
 rev = "deploy"
 
-[[env]]
+[[service.env]]
 name = "port"
 value = "123"
 ```
@@ -41,8 +45,9 @@ value = "123"
 If pullup sees a service config for the first time, then pullup
 
 - clones the repository,
-- creates a `.env` file and
-- runs `docker compose up`.
+- creates a `.env` file,
+- runs `docker compose pull` and
+- runs `docker compose up --force-recreate`.
 
 If a service config was removed, then pullup
 
@@ -54,8 +59,9 @@ If a service config was changed, then pullup
 - runs `docker compose down`,
 - deletes the repository,
 - clones the repository,
-- creates a `.env` file and
-- runs `docker compose up`.
+- creates a `.env` file,
+- runs `docker compose pull` and
+- runs `docker compose up --force-recreate`.
 
 For each service pullup periodically
 
@@ -65,6 +71,20 @@ For each service pullup periodically
 - sets the HEAD to the current revision and
 - runs `docker compose up`.
 
+For each service pullup periodically
+
+- runs `docker compose pull` and
+- continues if an image has changed,
+- runs `docker compose up --force-recreate`.
+
+## Open questions
+
+- Do we want to run `docker system prune --all` periodically? Or something similar for cleanup?
+
 ## Existing solutions
 
 TODO
+
+## Useful links
+
+- [GitHub deploy keys](https://github.blog/news-insights/product-news/read-only-deploy-keys/)
