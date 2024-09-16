@@ -87,7 +87,7 @@ For each service pullup periodically
   - Too powerful and complex for my simple use-case
 - [Harbormaster](https://gitlab.com/stavros/harbormaster)
   - Looks very promising
-  - Based on `docker compose` and git repositories
+  - Based on docker-compose and git repositories
   - Doesn't seem to do `docker compose pull`
 - [Watchtower](https://github.com/containrrr/watchtower)
   - Looks very simple
@@ -96,6 +96,11 @@ For each service pullup periodically
 - [Dokku](https://dokku.com/docs/getting-started/installation/)
   - More complex because it's a whole platform
   - Complexity might be worth it
+- [Yacht](https://yacht.sh/)
+  - Container management web UI
+  - Supports container and docker-compose
+  - Supports templates and one-click installations
+  - Git repository?
 
 ## Useful links
 
