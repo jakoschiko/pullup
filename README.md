@@ -83,7 +83,19 @@ For each service pullup periodically
 
 ## Existing solutions
 
-TODO
+- Kubernetes and clones
+  - Too powerful and complex for my simple use-case
+- [Harbormaster](https://gitlab.com/stavros/harbormaster)
+  - Looks very promising
+  - Based on `docker compose` and git repositories
+  - Doesn't seem to do `docker compose pull`
+- [Watchtower](https://github.com/containrrr/watchtower)
+  - Looks very simple
+  - Based on simple docker containers
+  - Maybe can be combined with other tools
+- [Dokku](https://dokku.com/docs/getting-started/installation/)
+  - More complex because it's a whole platform
+  - Complexity might be worth it
 
 ## Useful links
 
